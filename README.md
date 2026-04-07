@@ -6,7 +6,7 @@
 
 ## Overview
 
-MCPHub is a monorepo of production-grade Model Context Protocol (MCP) servers that give AI agents direct, tool-based access to the platforms you already run. Each server exposes a focused set of tools -- create, read, update, delete, search, configure -- so Claude, GPT, or any MCP-compatible client can operate your infrastructure, marketing stack, analytics, billing, messaging, and more without custom glue code. Every server ships as a standalone TypeScript package with consistent configuration, authentication handling, and error reporting.
+MCPServers is a monorepo of production-grade Model Context Protocol (MCP) servers that give AI agents direct, tool-based access to the platforms you already run. Each server exposes a focused set of tools -- create, read, update, delete, search, configure -- so Claude, GPT, or any MCP-compatible client can operate your infrastructure, marketing stack, analytics, billing, messaging, and more without custom glue code. Every server ships as a standalone TypeScript package with consistent configuration, authentication handling, and error reporting.
 
 ---
 
