@@ -104,4 +104,4 @@ packages/<server-name>/
 
 ---
 
-Copyright 2026. All rights reserved AgentNXXT. An Autonomyx Platform.
+Copyright 2026. All rights reserved AgentNxt. An Autonomyx Platform.
