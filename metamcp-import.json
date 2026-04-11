@@ -1,0 +1,686 @@
+{
+  "mcpServers": {
+    "agentcrew": {
+      "type": "STDIO",
+      "description": "MCP server for AgentCrew (CrewAI-Studio) \u2014 manage agents, tasks, crews, and results",
+      "command": "node",
+      "args": [
+        "packages/agentcrew-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "AGENTCREW_URL": ""
+      }
+    },
+    "argilla": {
+      "type": "STDIO",
+      "description": "MCP server for Argilla data labeling platform API",
+      "command": "node",
+      "args": [
+        "packages/argilla-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "ARGILLA_API_KEY": "",
+        "ARGILLA_URL": ""
+      }
+    },
+    "aws-kb-retrieval": {
+      "type": "STDIO",
+      "description": "MCP server for AWS Knowledge Base retrieval using Bedrock Agent Runtime",
+      "command": "node",
+      "args": [
+        "packages/aws-kb-retrieval-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "AWS_ACCESS_KEY_ID": "",
+        "AWS_REGION": "",
+        "AWS_SECRET_ACCESS_KEY": ""
+      }
+    },
+    "brave-search": {
+      "type": "STDIO",
+      "description": "MCP server for Brave Search API integration",
+      "command": "node",
+      "args": [
+        "packages/brave-search-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "BRAVE_API_KEY": ""
+      }
+    },
+    "calcom": {
+      "type": "STDIO",
+      "description": "MCP server for Cal.com scheduling platform",
+      "command": "node",
+      "args": [
+        "packages/calcom-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "CALCOM_API_KEY": "",
+        "CALCOM_URL": ""
+      }
+    },
+    "camunda": {
+      "type": "STDIO",
+      "description": "MCP Server for Camunda process orchestration",
+      "command": "node",
+      "args": [
+        "packages/camunda-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "CAMUNDA_CLIENT_ID": "",
+        "CAMUNDA_CLIENT_SECRET": "",
+        "CAMUNDA_URL": ""
+      }
+    },
+    "cognitive-memory": {
+      "type": "STDIO",
+      "description": "MCP server for Cognitive Memory Engine \u2014 memory CRUD, cortex retrieval, and chat integration",
+      "command": "node",
+      "args": [
+        "packages/cognitive-memory-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "CME_API_KEY": "",
+        "CME_URL": ""
+      }
+    },
+    "erpnext": {
+      "type": "STDIO",
+      "description": "MCP Server for ERPNext/Frappe REST API",
+      "command": "node",
+      "args": [
+        "packages/erpnext-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "ERPNEXT_API_KEY": "",
+        "ERPNEXT_API_SECRET": "",
+        "ERPNEXT_URL": ""
+      }
+    },
+    "everart": {
+      "type": "STDIO",
+      "description": "MCP server for EverArt API integration",
+      "command": "node",
+      "args": [
+        "packages/everart-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "EVERART_API_KEY": ""
+      }
+    },
+    "everything": {
+      "type": "STDIO",
+      "description": "MCP server that exercises all the features of the MCP protocol",
+      "command": "node",
+      "args": [
+        "packages/everything-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "GZIP_ALLOWED_DOMAINS": "",
+        "GZIP_MAX_FETCH_SIZE": "",
+        "GZIP_MAX_FETCH_TIME_MILLIS": ""
+      }
+    },
+    "evidently": {
+      "type": "STDIO",
+      "description": "MCP server for Evidently AI API",
+      "command": "node",
+      "args": [
+        "packages/evidently-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "EVIDENTLY_TOKEN": "",
+        "EVIDENTLY_URL": ""
+      }
+    },
+    "evolution": {
+      "type": "STDIO",
+      "description": "MCP server for Evolution API",
+      "command": "node",
+      "args": [
+        "packages/evolution-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "EVOLUTION_API_KEY": "",
+        "EVOLUTION_URL": ""
+      }
+    },
+    "exa": {
+      "type": "STDIO",
+      "description": "A Model Context Protocol server with Exa for web search and web crawling. Provides real-time web searches with configurable tool selection, allowing users to enable or disable specific search capabilities. Supports customizable result counts, live crawling options, and returns content from the most relevant websites.",
+      "command": "node",
+      "args": [
+        "packages/exa-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "AGNOST_LOG_LEVEL": "",
+        "EXA_API_KEY": "",
+        "OAUTH_AUDIENCE": "",
+        "OAUTH_ISSUER": ""
+      }
+    },
+    "filesystem": {
+      "type": "STDIO",
+      "description": "MCP server for filesystem access",
+      "command": "node",
+      "args": [
+        "packages/filesystem-mcp-server/dist/index.js"
+      ]
+    },
+    "gdrive": {
+      "type": "STDIO",
+      "description": "MCP server for interacting with Google Drive",
+      "command": "node",
+      "args": [
+        "packages/gdrive-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "GDRIVE_CREDENTIALS_PATH": "",
+        "GDRIVE_OAUTH_PATH": ""
+      }
+    },
+    "ghost": {
+      "type": "STDIO",
+      "description": "MCP server for Ghost CMS Admin API",
+      "command": "node",
+      "args": [
+        "packages/ghost-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "GHOST_ADMIN_KEY": "",
+        "GHOST_URL": ""
+      }
+    },
+    "github": {
+      "type": "STDIO",
+      "description": "MCP server for using the GitHub API",
+      "command": "node",
+      "args": [
+        "packages/github-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": ""
+      }
+    },
+    "gitlab": {
+      "type": "STDIO",
+      "description": "MCP server for using the GitLab API",
+      "command": "node",
+      "args": [
+        "packages/gitlab-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "GITLAB_API_URL": "",
+        "GITLAB_PERSONAL_ACCESS_TOKEN": ""
+      }
+    },
+    "glitchtip": {
+      "type": "STDIO",
+      "description": "MCP Server for GlitchTip error tracking",
+      "command": "node",
+      "args": [
+        "packages/glitchtip-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "GLITCHTIP_API_TOKEN": "",
+        "GLITCHTIP_URL": ""
+      }
+    },
+    "google-maps": {
+      "type": "STDIO",
+      "description": "MCP server for Google Maps Platform APIs \u2014 geocoding, places, routing, maps, elevation, air quality, pollen, solar, and more",
+      "command": "node",
+      "args": [
+        "packages/google-maps-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "GOOGLE_MAPS_API_KEY": ""
+      }
+    },
+    "grafana": {
+      "type": "STDIO",
+      "description": "MCP server for Grafana API",
+      "command": "node",
+      "args": [
+        "packages/grafana-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "GRAFANA_API_KEY": "",
+        "GRAFANA_URL": ""
+      }
+    },
+    "lago": {
+      "type": "STDIO",
+      "description": "MCP server for Lago Billing API",
+      "command": "node",
+      "args": [
+        "packages/lago-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "LAGO_API_KEY": "",
+        "LAGO_URL": ""
+      }
+    },
+    "langflow": {
+      "type": "STDIO",
+      "description": "MCP Server for Langflow flow management",
+      "command": "node",
+      "args": [
+        "packages/langflow-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "LANGFLOW_API_KEY": "",
+        "LANGFLOW_URL": ""
+      }
+    },
+    "liferay": {
+      "type": "STDIO",
+      "description": "MCP Server for Liferay DXP headless REST APIs",
+      "command": "node",
+      "args": [
+        "packages/liferay-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "LIFERAY_PASSWORD": "",
+        "LIFERAY_URL": "",
+        "LIFERAY_USERNAME": ""
+      }
+    },
+    "limesurvey": {
+      "type": "STDIO",
+      "description": "MCP server for LimeSurvey JSON-RPC API",
+      "command": "node",
+      "args": [
+        "packages/limesurvey-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "LIMESURVEY_PASSWORD": "",
+        "LIMESURVEY_URL": "",
+        "LIMESURVEY_USERNAME": ""
+      }
+    },
+    "litellm": {
+      "type": "STDIO",
+      "description": "MCP Server for LiteLLM proxy management",
+      "command": "node",
+      "args": [
+        "packages/litellm-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "LITELLM_MASTER_KEY": "",
+        "LITELLM_URL": ""
+      }
+    },
+    "marquez": {
+      "type": "STDIO",
+      "description": "",
+      "command": "node",
+      "args": [
+        "packages/marquez-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "MARQUEZ_API_KEY": "",
+        "MARQUEZ_URL": ""
+      }
+    },
+    "matomo": {
+      "type": "STDIO",
+      "description": "MCP server for Matomo Analytics API",
+      "command": "node",
+      "args": [
+        "packages/matomo-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "MATOMO_SITE_ID": "",
+        "MATOMO_TOKEN": "",
+        "MATOMO_URL": ""
+      }
+    },
+    "mautic": {
+      "type": "STDIO",
+      "description": "MCP Server for Mautic marketing automation",
+      "command": "node",
+      "args": [
+        "packages/mautic-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "MAUTIC_PASSWORD": "",
+        "MAUTIC_URL": "",
+        "MAUTIC_USERNAME": ""
+      }
+    },
+    "memory": {
+      "type": "STDIO",
+      "description": "MCP server for enabling memory for Claude through a knowledge graph",
+      "command": "node",
+      "args": [
+        "packages/memory-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "MEMORY_FILE_PATH": ""
+      }
+    },
+    "mlflow": {
+      "type": "STDIO",
+      "description": "MCP server for MLflow API",
+      "command": "node",
+      "args": [
+        "packages/mlflow-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "MLFLOW_TOKEN": "",
+        "MLFLOW_URL": ""
+      }
+    },
+    "n8n": {
+      "type": "STDIO",
+      "description": "MCP Server for n8n workflow automation",
+      "command": "node",
+      "args": [
+        "packages/n8n-mcp-server/dist/index.js"
+      ]
+    },
+    "nextcloud": {
+      "type": "STDIO",
+      "description": "MCP server for Nextcloud API (OCS, WebDAV, files, shares, users)",
+      "command": "node",
+      "args": [
+        "packages/nextcloud-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "NEXTCLOUD_PASSWORD": "",
+        "NEXTCLOUD_URL": "",
+        "NEXTCLOUD_USERNAME": ""
+      }
+    },
+    "nocodb": {
+      "type": "STDIO",
+      "description": "MCP server for NocoDB API",
+      "command": "node",
+      "args": [
+        "packages/nocodb-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "NOCODB_API_TOKEN": "",
+        "NOCODB_URL": ""
+      }
+    },
+    "ollama": {
+      "type": "STDIO",
+      "description": "MCP server for Ollama \u2014 manage and run local LLM models",
+      "command": "node",
+      "args": [
+        "packages/ollama-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "OLLAMA_URL": ""
+      }
+    },
+    "opa": {
+      "type": "STDIO",
+      "description": "MCP server for Open Policy Agent (OPA) API",
+      "command": "node",
+      "args": [
+        "packages/opa-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "OPA_TOKEN": "",
+        "OPA_URL": ""
+      }
+    },
+    "postgres": {
+      "type": "STDIO",
+      "description": "MCP server for interacting with PostgreSQL databases",
+      "command": "node",
+      "args": [
+        "packages/postgres-mcp-server/dist/index.js"
+      ]
+    },
+    "postiz": {
+      "type": "STDIO",
+      "description": "MCP server for Postiz API",
+      "command": "node",
+      "args": [
+        "packages/postiz-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "POSTIZ_API_KEY": "",
+        "POSTIZ_URL": ""
+      }
+    },
+    "puppeteer": {
+      "type": "STDIO",
+      "description": "MCP server for browser automation using Puppeteer",
+      "command": "node",
+      "args": [
+        "packages/puppeteer-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "ALLOW_DANGEROUS": "",
+        "DOCKER_CONTAINER": "",
+        "PUPPETEER_LAUNCH_OPTIONS": ""
+      }
+    },
+    "qdrant": {
+      "type": "STDIO",
+      "description": "",
+      "command": "node",
+      "args": [
+        "packages/qdrant-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "QDRANT_API_KEY": "",
+        "QDRANT_URL": ""
+      }
+    },
+    "redis": {
+      "type": "STDIO",
+      "description": "MCP server for using Redis",
+      "command": "node",
+      "args": [
+        "packages/redis-mcp-server/dist/index.js"
+      ]
+    },
+    "rustfs": {
+      "type": "STDIO",
+      "description": "MCP server for RustFS S3-compatible object storage",
+      "command": "node",
+      "args": [
+        "packages/rustfs-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "RUSTFS_ACCESS_KEY": "",
+        "RUSTFS_SECRET_KEY": "",
+        "RUSTFS_URL": ""
+      }
+    },
+    "searxng": {
+      "type": "STDIO",
+      "description": "MCP Server for SearXNG metasearch engine",
+      "command": "node",
+      "args": [
+        "packages/searxng-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "SEARXNG_URL": ""
+      }
+    },
+    "sequentialthinking": {
+      "type": "STDIO",
+      "description": "MCP server for sequential thinking and problem solving",
+      "command": "node",
+      "args": [
+        "packages/sequentialthinking-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "DISABLE_THOUGHT_LOGGING": ""
+      }
+    },
+    "simstudio": {
+      "type": "STDIO",
+      "description": "MCP server for SimStudio (Sim) workflow management \u2014 create, execute, and deploy AI agent workflows",
+      "command": "node",
+      "args": [
+        "packages/simstudio-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "SIMSTUDIO_API_KEY": "",
+        "SIMSTUDIO_URL": ""
+      }
+    },
+    "skyvern": {
+      "type": "STDIO",
+      "description": "MCP Server for Skyvern browser automation",
+      "command": "node",
+      "args": [
+        "packages/skyvern-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "SKYVERN_API_KEY": "",
+        "SKYVERN_URL": ""
+      }
+    },
+    "slack": {
+      "type": "STDIO",
+      "description": "MCP server for interacting with Slack",
+      "command": "node",
+      "args": [
+        "packages/slack-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "SLACK_BOT_TOKEN": "",
+        "SLACK_CHANNEL_IDS": "",
+        "SLACK_TEAM_ID": ""
+      }
+    },
+    "stalwart": {
+      "type": "STDIO",
+      "description": "MCP Server for Stalwart mail server",
+      "command": "node",
+      "args": [
+        "packages/stalwart-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "STALWART_PASSWORD": "",
+        "STALWART_URL": "",
+        "STALWART_USERNAME": ""
+      }
+    },
+    "surrealdb": {
+      "type": "STDIO",
+      "description": "",
+      "command": "node",
+      "args": [
+        "packages/surrealdb-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "SURREALDB_DB": "",
+        "SURREALDB_NS": "",
+        "SURREALDB_PASS": "",
+        "SURREALDB_URL": "",
+        "SURREALDB_USER": ""
+      }
+    },
+    "temporal": {
+      "type": "STDIO",
+      "description": "MCP Server for Temporal workflow orchestration",
+      "command": "node",
+      "args": [
+        "packages/temporal-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "TEMPORAL_API_KEY": "",
+        "TEMPORAL_NAMESPACE": "",
+        "TEMPORAL_URL": ""
+      }
+    },
+    "tuwunel": {
+      "type": "STDIO",
+      "description": "MCP server for Tuwunel Matrix homeserver API",
+      "command": "node",
+      "args": [
+        "packages/tuwunel-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "TUWUNEL_ACCESS_TOKEN": "",
+        "TUWUNEL_PASSWORD": "",
+        "TUWUNEL_URL": "",
+        "TUWUNEL_USERNAME": ""
+      }
+    },
+    "txtai": {
+      "type": "STDIO",
+      "description": "MCP server for txtai semantic search and embeddings",
+      "command": "node",
+      "args": [
+        "packages/txtai-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "TXTAI_URL": ""
+      }
+    },
+    "typebot": {
+      "type": "STDIO",
+      "description": "MCP Server for Typebot chatbot builder",
+      "command": "node",
+      "args": [
+        "packages/typebot-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "TYPEBOT_API_TOKEN": "",
+        "TYPEBOT_URL": ""
+      }
+    },
+    "uptime-kuma": {
+      "type": "STDIO",
+      "description": "MCP server for Uptime Kuma v2 monitoring API",
+      "command": "node",
+      "args": [
+        "packages/uptime-kuma-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "UPTIME_KUMA_PASSWORD": "",
+        "UPTIME_KUMA_URL": "",
+        "UPTIME_KUMA_USERNAME": ""
+      }
+    },
+    "woocommerce": {
+      "type": "STDIO",
+      "description": "MCP server for WooCommerce REST API",
+      "command": "node",
+      "args": [
+        "packages/woocommerce-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "WOOCOMMERCE_KEY": "",
+        "WOOCOMMERCE_SECRET": "",
+        "WOOCOMMERCE_URL": ""
+      }
+    },
+    "wuzapi": {
+      "type": "STDIO",
+      "description": "MCP server for WuzAPI WhatsApp API",
+      "command": "node",
+      "args": [
+        "packages/wuzapi-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "WUZAPI_TOKEN": "",
+        "WUZAPI_URL": ""
+      }
+    },
+    "zabbix": {
+      "type": "STDIO",
+      "description": "MCP Server for Zabbix monitoring",
+      "command": "node",
+      "args": [
+        "packages/zabbix-mcp-server/dist/index.js"
+      ],
+      "env": {
+        "ZABBIX_PASSWORD": "",
+        "ZABBIX_URL": "",
+        "ZABBIX_USER": ""
+      }
+    }
+  }
+}
