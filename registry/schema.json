@@ -1,6 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/agentnxt/mcp-registry/blob/main/registry/schema.json",
+  "$comment": "Schema.org WebApplication profile for AgentNxt MCP registry entries. Schema.org is an open vocabulary, so this schema validates required registry fields and selected Schema.org fields while allowing additional Schema.org properties.",
   "title": "AgentNxt MCP Registry WebApplication Entry",
   "description": "JSON-LD compatible registry entry for MCP servers modeled as schema.org WebApplication with MCP-specific operational metadata under mcp.",
   "type": "object",
@@ -22,68 +23,262 @@
     "provider",
     "mcp"
   ],
-  "additionalProperties": false,
+  "additionalProperties": true,
   "properties": {
-    "$schema": { "type": "string" },
+    "$schema": {
+      "type": "string"
+    },
     "@context": {
       "oneOf": [
-        { "type": "string", "const": "https://schema.org" },
+        {
+          "type": "string",
+          "enum": [
+            "https://schema.org",
+            "https://schema.org/"
+          ]
+        },
         {
           "type": "object",
-          "required": ["@vocab", "mcp"],
-          "additionalProperties": { "type": "string" },
+          "required": [
+            "@vocab",
+            "mcp"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          },
           "properties": {
-            "@vocab": { "type": "string", "const": "https://schema.org/" },
-            "mcp": { "type": "string" }
+            "@vocab": {
+              "type": "string",
+              "const": "https://schema.org/"
+            },
+            "mcp": {
+              "type": "string"
+            }
           }
         }
       ]
     },
-    "@type": { "type": "string", "const": "WebApplication" },
-    "@id": { "type": "string" },
-    "identifier": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
-    "name": { "type": "string" },
-    "description": { "type": "string" },
-    "url": { "type": "string" },
+    "@type": {
+      "type": "string",
+      "const": "WebApplication"
+    },
+    "@id": {
+      "type": "string",
+      "format": "uri-reference"
+    },
+    "identifier": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        {
+          "$ref": "#/$defs/propertyValue"
+        },
+        {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/$defs/propertyValue"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri-reference"
+    },
     "sameAs": {
-      "oneOf": [
-        { "type": "string" },
-        { "type": "array", "items": { "type": "string" } }
-      ]
+      "$ref": "#/$defs/stringOrStringArray"
     },
-    "applicationCategory": { "type": "string" },
-    "applicationSubCategory": { "type": "string" },
-    "browserRequirements": { "type": "string" },
-    "runtimePlatform": { "type": "string" },
-    "operatingSystem": { "type": "string" },
-    "softwareRequirements": {
-      "oneOf": [
-        { "type": "string" },
-        { "type": "array", "items": { "type": "string" }, "minItems": 1 }
-      ]
+    "image": {
+      "$ref": "#/$defs/thingOrUrlOrArray"
     },
-    "softwareVersion": { "type": "string" },
+    "mainEntityOfPage": {
+      "$ref": "#/$defs/thingOrUrl"
+    },
+    "applicationCategory": {
+      "$ref": "#/$defs/textOrUrl"
+    },
+    "applicationSubCategory": {
+      "$ref": "#/$defs/textOrUrl"
+    },
+    "applicationSuite": {
+      "type": "string"
+    },
+    "availableOnDevice": {
+      "type": "string"
+    },
+    "browserRequirements": {
+      "type": "string"
+    },
+    "countriesSupported": {
+      "$ref": "#/$defs/stringOrStringArray"
+    },
+    "countriesNotSupported": {
+      "$ref": "#/$defs/stringOrStringArray"
+    },
+    "downloadUrl": {
+      "type": "string",
+      "format": "uri-reference"
+    },
     "featureList": {
+      "$ref": "#/$defs/textOrUrlOrArray"
+    },
+    "fileSize": {
+      "type": "string"
+    },
+    "installUrl": {
+      "type": "string",
+      "format": "uri-reference"
+    },
+    "memoryRequirements": {
+      "$ref": "#/$defs/textOrUrl"
+    },
+    "operatingSystem": {
+      "$ref": "#/$defs/textOrObjectOrArray"
+    },
+    "permissions": {
+      "type": "string"
+    },
+    "processorRequirements": {
+      "type": "string"
+    },
+    "releaseNotes": {
+      "$ref": "#/$defs/textOrUrl"
+    },
+    "runtimePlatform": {
+      "$ref": "#/$defs/textOrObjectOrArray"
+    },
+    "screenshot": {
+      "$ref": "#/$defs/thingOrUrlOrArray"
+    },
+    "softwareAddOn": {
+      "$ref": "#/$defs/thingOrArray"
+    },
+    "softwareHelp": {
+      "$ref": "#/$defs/thingOrUrl"
+    },
+    "softwareRequirements": {
+      "$ref": "#/$defs/textOrUrlOrObjectOrArray"
+    },
+    "softwareVersion": {
+      "type": "string"
+    },
+    "storageRequirements": {
+      "$ref": "#/$defs/textOrUrl"
+    },
+    "supportingData": {
+      "$ref": "#/$defs/thingOrArray"
+    },
+    "abstract": {
+      "type": "string"
+    },
+    "accessMode": {
+      "$ref": "#/$defs/accessModeValues"
+    },
+    "accessModeSufficient": {
+      "$ref": "#/$defs/itemListOrArray"
+    },
+    "accessibilityAPI": {
+      "$ref": "#/$defs/accessibilityAPIValues"
+    },
+    "accessibilityControl": {
+      "$ref": "#/$defs/accessibilityControlValues"
+    },
+    "accessibilityFeature": {
+      "$ref": "#/$defs/accessibilityFeatureValues"
+    },
+    "accessibilityHazard": {
+      "$ref": "#/$defs/accessibilityHazardValues"
+    },
+    "accessibilitySummary": {
+      "type": "string"
+    },
+    "accountablePerson": {
+      "$ref": "#/$defs/person"
+    },
+    "audience": {
+      "$ref": "#/$defs/thingOrArray"
+    },
+    "author": {
+      "$ref": "#/$defs/orgPersonOrArray"
+    },
+    "creator": {
+      "$ref": "#/$defs/orgPersonOrArray"
+    },
+    "copyrightHolder": {
+      "$ref": "#/$defs/orgPersonOrArray"
+    },
+    "copyrightNotice": {
+      "type": "string"
+    },
+    "copyrightYear": {
       "oneOf": [
-        { "type": "string" },
-        { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        }
       ]
     },
-    "installUrl": { "type": "string" },
-    "downloadUrl": { "type": "string" },
-    "softwareHelp": { "type": "string" },
-    "releaseNotes": { "type": "string" },
-    "license": { "type": "string" },
-    "permissions": { "type": "string" },
+    "dateCreated": {
+      "type": "string"
+    },
+    "dateModified": {
+      "type": "string"
+    },
+    "datePublished": {
+      "type": "string"
+    },
+    "encodingFormat": {
+      "$ref": "#/$defs/stringOrStringArray"
+    },
+    "genre": {
+      "$ref": "#/$defs/stringOrStringArray"
+    },
+    "inLanguage": {
+      "$ref": "#/$defs/stringOrStringArray"
+    },
+    "isAccessibleForFree": {
+      "type": "boolean"
+    },
+    "isFamilyFriendly": {
+      "type": "boolean"
+    },
+    "keywords": {
+      "$ref": "#/$defs/stringOrStringArray"
+    },
+    "license": {
+      "$ref": "#/$defs/textOrUrl"
+    },
+    "offers": {
+      "$ref": "#/$defs/thingOrArray"
+    },
+    "publisher": {
+      "$ref": "#/$defs/orgPersonOrArray"
+    },
+    "review": {
+      "$ref": "#/$defs/thingOrArray"
+    },
+    "aggregateRating": {
+      "$ref": "#/$defs/thing"
+    },
     "provider": {
-      "type": "object",
-      "required": ["@type", "name"],
-      "additionalProperties": false,
-      "properties": {
-        "@type": { "type": "string", "enum": ["Organization", "Person"] },
-        "name": { "type": "string" },
-        "url": { "type": "string" }
-      }
+      "$ref": "#/$defs/orgPerson"
     },
     "mcp": {
       "type": "object",
@@ -99,76 +294,630 @@
       ],
       "additionalProperties": false,
       "properties": {
-        "status": { "type": "string", "enum": ["draft", "experimental", "stable", "deprecated"] },
-        "category": { "type": "string" },
-        "tags": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "experimental",
+            "stable",
+            "deprecated"
+          ]
+        },
+        "category": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
         "source": {
           "type": "object",
-          "required": ["type", "url"],
+          "required": [
+            "type",
+            "url"
+          ],
           "additionalProperties": false,
           "properties": {
-            "type": { "type": "string", "enum": ["local", "upstream", "remote", "container"] },
-            "url": { "type": "string" },
-            "package": { "type": "string" },
-            "license": { "type": "string" }
+            "type": {
+              "type": "string",
+              "enum": [
+                "local",
+                "upstream",
+                "remote",
+                "container"
+              ]
+            },
+            "url": {
+              "type": "string",
+              "format": "uri-reference"
+            },
+            "package": {
+              "type": "string"
+            },
+            "license": {
+              "type": "string"
+            }
           }
         },
         "transports": {
           "type": "array",
-          "items": { "type": "string", "enum": ["stdio", "sse", "streamable-http", "http"] },
+          "items": {
+            "type": "string",
+            "enum": [
+              "stdio",
+              "sse",
+              "streamable-http",
+              "http"
+            ]
+          },
           "minItems": 1
         },
         "runtime": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "language": { "type": "string" },
-            "minimumVersion": { "type": "string" }
+            "language": {
+              "type": "string"
+            },
+            "minimumVersion": {
+              "type": "string"
+            }
           }
         },
         "deployment": {
           "type": "object",
-          "required": ["recommended", "docker"],
+          "required": [
+            "recommended",
+            "docker"
+          ],
           "additionalProperties": false,
           "properties": {
-            "recommended": { "type": "string", "enum": ["docker", "npx", "pipx", "remote", "cloud-run", "custom"] },
+            "recommended": {
+              "type": "string",
+              "enum": [
+                "docker",
+                "npx",
+                "pipx",
+                "remote",
+                "cloud-run",
+                "custom"
+              ]
+            },
             "docker": {
               "type": "object",
               "additionalProperties": false,
               "properties": {
-                "image": { "type": "string" },
-                "dockerfile": { "type": "string" },
-                "ports": { "type": "array", "items": { "type": "string" } }
+                "image": {
+                  "type": "string"
+                },
+                "dockerfile": {
+                  "type": "string"
+                },
+                "ports": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
               }
             },
             "local": {
               "type": "object",
               "additionalProperties": false,
               "properties": {
-                "command": { "type": "string" },
-                "args": { "type": "array", "items": { "type": "string" } }
+                "command": {
+                  "type": "string"
+                },
+                "args": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "remote": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "endpoint": {
+                  "type": "string",
+                  "format": "uri-reference"
+                },
+                "transport": {
+                  "type": "string",
+                  "enum": [
+                    "sse",
+                    "streamable-http",
+                    "http"
+                  ]
+                }
               }
             }
           }
         },
         "auth": {
           "type": "object",
-          "required": ["type", "requiredEnv"],
+          "required": [
+            "type",
+            "requiredEnv"
+          ],
           "additionalProperties": false,
           "properties": {
-            "type": { "type": "string" },
-            "requiredEnv": { "type": "array", "items": { "type": "string" } },
-            "optionalEnv": { "type": "array", "items": { "type": "string" }, "default": [] },
-            "notes": { "type": "string" }
+            "type": {
+              "type": "string"
+            },
+            "requiredEnv": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "optionalEnv": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "notes": {
+              "type": "string"
+            }
           }
         },
-        "tools": { "type": "array", "items": { "type": "string" } },
-        "maintainers": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maintainers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
         "links": {
           "type": "object",
-          "additionalProperties": { "type": "string" }
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
+    }
+  },
+  "$defs": {
+    "thing": {
+      "type": "object",
+      "required": [
+        "@type"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri-reference"
+        }
+      }
+    },
+    "person": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/thing"
+        },
+        {
+          "properties": {
+            "@type": {
+              "const": "Person"
+            }
+          }
+        }
+      ]
+    },
+    "organization": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/thing"
+        },
+        {
+          "properties": {
+            "@type": {
+              "const": "Organization"
+            }
+          }
+        }
+      ]
+    },
+    "orgPerson": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/person"
+        },
+        {
+          "$ref": "#/$defs/organization"
+        }
+      ]
+    },
+    "orgPersonOrArray": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/orgPerson"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/orgPerson"
+          }
+        }
+      ]
+    },
+    "propertyValue": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "@type": {
+          "const": "PropertyValue"
+        },
+        "propertyID": {
+          "type": "string"
+        },
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri-reference"
+        }
+      }
+    },
+    "textOrUrl": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "format": "uri-reference"
+        }
+      ]
+    },
+    "textOrUrlOrArray": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "textOrObjectOrArray": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/$defs/thing"
+        },
+        {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/$defs/thing"
+              }
+            ]
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "textOrUrlOrObjectOrArray": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/$defs/thing"
+        },
+        {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/$defs/thing"
+              }
+            ]
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "stringOrStringArray": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "thingOrUrl": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/thing"
+        },
+        {
+          "type": "string",
+          "format": "uri-reference"
+        }
+      ]
+    },
+    "thingOrUrlOrArray": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/thing"
+        },
+        {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/thing"
+              },
+              {
+                "type": "string",
+                "format": "uri-reference"
+              }
+            ]
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "thingOrArray": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/thing"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/thing"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "itemList": {
+      "type": "object",
+      "required": [
+        "@type",
+        "itemListElement"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "@type": {
+          "const": "ItemList"
+        },
+        "itemListElement": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "itemListOrArray": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/itemList"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/itemList"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "accessModeValues": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/accessModeValue"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/accessModeValue"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "accessModeValue": {
+      "type": "string",
+      "enum": [
+        "auditory",
+        "chartOnVisual",
+        "chemOnVisual",
+        "colorDependent",
+        "diagramOnVisual",
+        "mathOnVisual",
+        "musicOnVisual",
+        "tactile",
+        "textOnVisual",
+        "textual",
+        "visual"
+      ]
+    },
+    "accessibilityAPIValues": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/accessibilityAPIValue"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/accessibilityAPIValue"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "accessibilityAPIValue": {
+      "type": "string",
+      "enum": [
+        "AndroidAccessibility",
+        "ARIA",
+        "ATK",
+        "AT-SPI",
+        "BlackBerryAccessibility",
+        "iAccessible2",
+        "iOSAccessibility",
+        "JavaAccessibility",
+        "MacOSXAccessibility",
+        "MSAA",
+        "UIAutomation",
+        "UIAccessibility"
+      ]
+    },
+    "accessibilityControlValues": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/accessibilityControlValue"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/accessibilityControlValue"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "accessibilityControlValue": {
+      "type": "string",
+      "enum": [
+        "fullKeyboardControl",
+        "fullMouseControl",
+        "fullSwitchControl",
+        "fullTouchControl",
+        "fullVideoControl",
+        "fullVoiceControl"
+      ]
+    },
+    "accessibilityFeatureValues": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/accessibilityFeatureValue"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/accessibilityFeatureValue"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "accessibilityFeatureValue": {
+      "type": "string",
+      "enum": [
+        "alternativeText",
+        "annotations",
+        "audioDescription",
+        "bookmarks",
+        "braille",
+        "captions",
+        "ChemML",
+        "describedMath",
+        "displayTransformability",
+        "highContrastAudio",
+        "highContrastDisplay",
+        "index",
+        "largePrint",
+        "latex",
+        "longDescription",
+        "MathML",
+        "none",
+        "printPageNumbers",
+        "readingOrder",
+        "rubyAnnotations",
+        "signLanguage",
+        "structuralNavigation",
+        "synchronizedAudioText",
+        "tableOfContents",
+        "tactileGraphic",
+        "tactileObject",
+        "taggedPDF",
+        "timingControl",
+        "transcript",
+        "unlocked"
+      ]
+    },
+    "accessibilityHazardValues": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/accessibilityHazardValue"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/accessibilityHazardValue"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "accessibilityHazardValue": {
+      "type": "string",
+      "enum": [
+        "flashing",
+        "motionSimulation",
+        "noFlashingHazard",
+        "noMotionSimulationHazard",
+        "noSoundHazard",
+        "sound",
+        "unknown"
+      ]
     }
   }
 }
