@@ -4,7 +4,9 @@ This SOP defines the standard process for adding, reviewing, and publishing MCP 
 
 ## Goals
 
-- Keep every server discoverable through structured metadata.
+- Keep every server discoverable through Schema.org-compatible metadata.
+- Model each registry entry as a JSON-LD-style `WebApplication`.
+- Keep MCP-specific operational metadata under the namespaced `mcp` object.
 - Make local and hosted deployment instructions predictable.
 - Preserve upstream attribution, license notices, and security context.
 - Ensure new entries can be reviewed without reverse-engineering the server.
@@ -56,22 +58,34 @@ Each new server entry must include:
 
 ## Registry metadata checklist
 
-Every `registry/servers/<server-id>.json` file must include:
+Every `registry/servers/<server-id>.json` file must be shaped as a Schema.org-compatible `WebApplication` and include:
 
-- `id`
+- `@context`
+- `@type: WebApplication`
+- `identifier`
 - `name`
 - `description`
-- `status`
-- `category`
-- `source`
-- `transports`
-- `deployment`
-- `auth`
-- `tools`
-- `maintainers`
-- useful `links`
+- `applicationCategory`
+- `applicationSubCategory`
+- `browserRequirements`
+- `runtimePlatform`
+- `softwareRequirements`
+- `featureList`
+- `installUrl`
+- `downloadUrl` when a package or image is published
+- `license`
+- `permissions`
+- `provider`
+- `mcp.status`
+- `mcp.category`
+- `mcp.source`
+- `mcp.transports`
+- `mcp.deployment`
+- `mcp.auth`
+- `mcp.tools`
+- `mcp.maintainers`
 
-Use one of these statuses:
+Use one of these MCP statuses:
 
 - `draft`: metadata is incomplete or implementation is not validated.
 - `experimental`: deployable, but not production-hardened or fully verified.
@@ -95,7 +109,7 @@ mkdir -p registry/servers
 cp registry/servers/example.json registry/servers/<server-id>.json
 ```
 
-If `example.json` does not exist yet, use `registry/schema.json` as the contract.
+If `example.json` does not exist yet, use `registry/schema.json` as the contract and follow the closest existing entry.
 
 3. Add implementation, wrapper, or docs under `<server-id>/`.
 
@@ -137,6 +151,8 @@ Include this checklist in the PR description:
 ```markdown
 ## Registry
 - [ ] Added `registry/servers/<server-id>.json`
+- [ ] Entry is modeled as Schema.org `WebApplication`
+- [ ] MCP-specific fields are under `mcp`
 - [ ] Metadata validates as JSON
 - [ ] Source URL, package, and license are accurate
 - [ ] Runtime, transports, auth, and deployment fields are complete
@@ -164,6 +180,8 @@ Include this checklist in the PR description:
 Reviewers should verify:
 
 - The entry is useful and not a duplicate.
+- The entry follows the `WebApplication` shape.
+- MCP-specific metadata is namespaced under `mcp`.
 - The source and license are clear.
 - Secrets are passed through environment variables or a secret manager.
 - Deployment instructions are safe by default.
@@ -191,7 +209,7 @@ Use semantic versions when the implementation is maintained in this repo. For wr
 
 To deprecate a server:
 
-1. Set `status` to `deprecated`.
+1. Set `mcp.status` to `deprecated`.
 2. Add a deprecation note in the server README.
 3. Point users to the replacement server when one exists.
 4. Keep the existing Docker image available unless there is a security reason to remove it.
