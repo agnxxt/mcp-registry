@@ -34,7 +34,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         ]
       };
     default:
-      throw new Error();
+      throw new Error(`Unknown tool: ${request.params.name}`);
   }
 });
 
