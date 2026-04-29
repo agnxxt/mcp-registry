@@ -216,34 +216,80 @@
     </footer>
     <script>
         const servers = [
-            { name: 'filesystem-mcp-server', desc: 'File system operations with security', tools: '12 tools' },
-            { name: 'github-mcp-server', desc: 'GitHub API operations', tools: '25 tools' },
-            { name: 'gitlab-mcp-server', desc: 'GitLab API operations', tools: '15 tools' },
-            { name: 'slack-mcp-server', desc: 'Slack messaging and API', tools: '18 tools' },
-            { name: 'redis-mcp-server', desc: 'Redis cache operations', tools: '6 tools' },
-            { name: 'brave-search-mcp-server', desc: 'Web search via Brave API', tools: '5 tools' },
-            { name: 'gdrive-mcp-server', desc: 'Google Drive API', tools: '12 tools' },
-            { name: 'ollama-mcp-server', desc: 'Ollama local AI', tools: '6 tools' },
-            { name: 'qdrant-mcp-server', desc: 'Qdrant vector database', tools: '5 tools' },
-            { name: 'n8n-mcp-server', desc: 'n8n workflow automation', tools: '10 tools' },
-            { name: 'grafana-mcp-server', desc: 'Grafana monitoring', tools: '8 tools' },
-            { name: 'calcom-mcp-server', desc: 'Cal.com scheduling', tools: '6 tools' },
-            { name: 'logto-mcp-server', desc: 'Logto auth integration', tools: '15 tools' },
-            { name: 'surrealdb-mcp-server', desc: 'SurrealDB operations', tools: '8 tools' },
-            { name: 'mlflow-mcp-server', desc: 'MLflow tracking', tools: '12 tools' },
-            { name: 'zabbix-mcp-server', desc: 'Zabbix monitoring', tools: '6 tools' },
-            { name: 'temporal-mcp-server', desc: 'Temporal workflow', tools: '8 tools' },
-            { name: 'google-maps-mcp-server', desc: 'Google Maps API', tools: '6 tools' },
-            { name: 'sequentialthinking-mcp-server', desc: 'AI reasoning tools', tools: '4 tools' },
-            { name: 'playwright-mcp-server', desc: 'Browser automation', tools: '10 tools' },
+{ name: 'agentcrew-mcp-server', desc: 'MCP server for AgentCrew (CrewAI-Studio) — manage agents, tasks, crews, and results' },
+{ name: 'ansible-mcp-server', desc: 'Scaffold MCP server for ansible operations' },
+{ name: 'argilla-mcp-server', desc: 'MCP server for Argilla data labeling platform API' },
+{ name: 'aws-kb-retrieval-mcp-server', desc: 'MCP server for AWS Knowledge Base retrieval using Bedrock Agent Runtime' },
+{ name: 'brave-search-mcp-server', desc: 'Brave Search MCP Server: web results, images, videos, rich results, AI summaries, and more.' },
+{ name: 'calcom-mcp-server', desc: 'MCP server for Cal.com scheduling platform' },
+{ name: 'camunda-mcp-server', desc: 'MCP Server for Camunda process orchestration' },
+{ name: 'cognitive-memory-mcp-server', desc: 'MCP server for Cognitive Memory Engine — memory CRUD, cortex retrieval, and chat integration' },
+{ name: 'dbhub-mcp-server', desc: 'Minimal, token-efficient Database MCP Server for PostgreSQL, MySQL, SQL Server, SQLite, MariaDB' },
+{ name: 'erpnext-mcp-server', desc: 'MCP Server for ERPNext/Frappe REST API' },
+{ name: 'everart-mcp-server', desc: 'MCP server for EverArt API integration' },
+{ name: 'everything-mcp-server', desc: 'MCP server that exercises all the features of the MCP protocol' },
+{ name: 'evidently-mcp-server', desc: 'MCP server for Evidently AI API' },
+{ name: 'evolution-mcp-server', desc: 'MCP server for Evolution API' },
+{ name: 'exa-mcp-server', desc: 'A Model Context Protocol server with Exa for web search and web crawling.' },
+{ name: 'filesystem-mcp-server', desc: 'MCP server for filesystem access' },
+{ name: 'g2-mcp', desc: 'g2 mcp' },
+{ name: 'gcloud-run-mcp-server', desc: 'Scaffold MCP server for gcloud-run operations' },
+{ name: 'gdrive-mcp-server', desc: 'MCP server for interacting with Google Drive' },
+{ name: 'ghost-mcp-server', desc: 'MCP Server for Ghost CMS - Admin API & Content API' },
+{ name: 'github-mcp-server', desc: 'MCP server for using the GitHub API' },
+{ name: 'gitlab-mcp-server', desc: 'MCP server for using the GitLab API' },
+{ name: 'glitchtip-mcp-server', desc: 'MCP Server for GlitchTip error tracking' },
+{ name: 'google-analytics-mcp-server', desc: 'google analytics' },
+{ name: 'google-maps-mcp-server', desc: 'MCP server for Google Maps Platform APIs' },
+{ name: 'grafana-mcp-server', desc: 'MCP server for Grafana API' },
+{ name: 'hostinger-mcp', desc: 'hostinger mcp' },
+{ name: 'lago-mcp-server', desc: 'MCP server for Lago Billing API' },
+{ name: 'langflow-mcp-server', desc: 'MCP Server for Langflow flow management' },
+{ name: 'liferay-mcp-server', desc: 'MCP Server for Liferay Community Portal - Headless REST APIs' },
+{ name: 'liferay-mcp-sync', desc: 'liferay-mcp-sync' },
+{ name: 'limesurvey-mcp-server', desc: 'MCP server for LimeSurvey JSON-RPC API' },
+{ name: 'litellm-mcp-server', desc: 'MCP Server for LiteLLM proxy management' },
+{ name: 'logto-mcp-server', desc: 'MCP Server for Logto Management API & Accounts API (self-hosted)' },
+{ name: 'lxc-mcp-server', desc: 'Scaffold MCP server for lxc operations' },
+{ name: 'marquez-mcp-server', desc: 'marquez-mcp-server' },
+{ name: 'matomo-mcp-server', desc: 'MCP server for Matomo Analytics API' },
+{ name: 'mautic-mcp-server', desc: 'MCP Server for Mautic marketing automation' },
+{ name: 'memory-mcp-server', desc: 'MCP server for enabling memory for Claude through a knowledge graph' },
+{ name: 'microcloud-mcp-server', desc: 'Scaffold MCP server for microcloud operations' },
+{ name: 'mlflow-mcp-server', desc: 'MCP server for MLflow API' },
+{ name: 'n8n-mcp-server', desc: 'MCP Server for n8n workflow automation' },
+{ name: 'nextcloud-mcp-server', desc: 'MCP server for Nextcloud API' },
+{ name: 'nocodb-mcp-server', desc: 'MCP server for NocoDB API' },
+{ name: 'ollama-mcp-server', desc: 'MCP server for Ollama — manage and run local LLM models' },
+{ name: 'opa-mcp-server', desc: 'MCP server for Open Policy Agent (OPA) API' },
+{ name: 'playwright-mcp-server', desc: 'Playwright Tools for MCP' },
+{ name: 'postiz-mcp-server', desc: 'MCP server for Postiz API' },
+{ name: 'qdrant-mcp-server', desc: 'qdrant-mcp-server' },
+{ name: 'redis-mcp-server', desc: 'MCP server for using Redis' },
+{ name: 'rustfs-mcp-server', desc: 'MCP server for RustFS S3-compatible object storage' },
+{ name: 'searxng-mcp-server', desc: 'MCP Server for SearXNG metasearch engine' },
+{ name: 'sequentialthinking-mcp-server', desc: 'MCP server for sequential thinking and problem solving' },
+{ name: 'simstudio-mcp-server', desc: 'MCP server for SimStudio workflow management' },
+{ name: 'skyvern-mcp-server', desc: 'MCP Server for Skyvern browser automation' },
+{ name: 'slack-mcp-server', desc: 'MCP server for interacting with Slack' },
+{ name: 'stalwart-mcp-server', desc: 'MCP Server for Stalwart mail server' },
+{ name: 'surrealdb-mcp-server', desc: 'surrealdb-mcp-server' },
+{ name: 'temporal-mcp-server', desc: 'MCP Server for Temporal workflow orchestration' },
+{ name: 'terraform-mcp-server', desc: 'Scaffold MCP server for terraform operations' },
+{ name: 'tuwunel-mcp-server', desc: 'MCP server for Tuwunel Matrix homeserver API' },
+{ name: 'txtai-mcp-server', desc: 'MCP server for txtai semantic search and embeddings' },
+{ name: 'typebot-mcp-server', desc: 'MCP Server for Typebot chatbot builder' },
+{ name: 'uptime-kuma-mcp-server', desc: 'MCP server for Uptime Kuma v2 monitoring API' },
+{ name: 'woocommerce-mcp-server', desc: 'MCP server for WooCommerce REST API' },
+{ name: 'wuzapi-mcp-server', desc: 'MCP server for WuzAPI WhatsApp API' },
+{ name: 'zabbix-mcp-server', desc: 'MCP Server for Zabbix monitoring' }
         ];
-        document.getElementById('servers-grid').innerHTML = servers.map(server => `
-            <a href="https://github.com/agnxxt/mcp-registry/tree/main/${server.name}" class="server-card" target="_blank">
-                <h3>${server.name.replace('-mcp-server', '').replace(/-/g, ' ')}</h3>
-                <p>${server.desc}</p>
-                <div class="tools-count">${server.tools}</div>
-            </a>
-        `).join('');
+        document.getElementById('servers-grid').innerHTML = servers.map(server => 
+            '<a href="https://github.com/agnxxt/mcp-registry/tree/main/' + server.name + '" class="server-card" target="_blank">' +
+            '<h3>' + server.name.replace('-mcp-server', '').replace(/-/g, ' ') + '</h3>' +
+            '<p>' + server.desc + '</p>' +
+            '</a>'
+        ).join('');
     </script>
 </body>
 </html>
