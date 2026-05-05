@@ -1,0 +1,13 @@
+{
+  "name": "mautic-mcp",
+  "version": "0.1.0",
+  "description": "MCP tool adapter for Mautic",
+  "transport": "http",
+  "auth": "bearer",
+  "env": ["MAUTIC_URL", "MAUTIC_TOKEN"],
+  "tools": [
+    {"name": "create_contact", "description": "Create Mautic contact"},
+    {"name": "add_contact_to_segment", "description": "Add contact to Mautic segment"},
+    {"name": "trigger_campaign", "description": "Trigger campaign for contact"}
+  ]
+}

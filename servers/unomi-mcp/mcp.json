@@ -1,0 +1,13 @@
+{
+  "name": "unomi-mcp",
+  "version": "0.1.0",
+  "description": "MCP tool adapter for Apache Unomi",
+  "transport": "http",
+  "auth": "basic",
+  "env": ["UNOMI_URL", "UNOMI_USER", "UNOMI_PASSWORD"],
+  "tools": [
+    {"name": "upsert_profile", "description": "Create or update Unomi profile"},
+    {"name": "track_event", "description": "Track Unomi event"},
+    {"name": "get_profile", "description": "Get Unomi profile"}
+  ]
+}
