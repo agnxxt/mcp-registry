@@ -1,0 +1,115 @@
+version: '3.8'
+
+# ============================================================
+# AGenNext/mcp-registry — Docker Compose
+# MetaMCP is the MCP Manager / Gateway for all servers below.
+# Access MetaMCP UI at http://localhost:12005
+# MCP endpoint:       http://localhost:12008/metamcp/<NAME>/sse
+# ============================================================
+
+services:
+
+  # ──────────────────────────────────────────────
+  # MetaMCP — Registry Manager, Gateway, Auth Layer
+  # Manages all MCP servers: versions, auth, routing
+  # ──────────────────────────────────────────────
+  metamcp:
+    image: ghcr.io/metatool-ai/metamcp:latest
+    container_name: metamcp
+    ports:
+      - "12005:12005"   # MetaMCP Web UI
+      - "12008:12008"   # MCP endpoint (SSE / Streamable HTTP / OpenAPI)
+    environment:
+      - NODE_ENV=production
+      - APP_URL=http://localhost:12005
+      - DATABASE_URL=postgresql://metamcp:metamcp@metamcp-db:5432/metamcp
+      - BETTER_AUTH_SECRET=${METAMCP_AUTH_SECRET:-change-me-in-production}
+      # Optional: OIDC SSO (uncomment to enable)
+      # - OIDC_CLIENT_ID=${OIDC_CLIENT_ID}
+      # - OIDC_CLIENT_SECRET=${OIDC_CLIENT_SECRET}
+      # - OIDC_DISCOVERY_URL=${OIDC_DISCOVERY_URL}
+      - LOG_LEVEL=${LOG_LEVEL:-errors-only}
+    depends_on:
+      metamcp-db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    volumes:
+      - metamcp_data:/app/data
+
+  metamcp-db:
+    image: postgres:15-alpine
+    container_name: metamcp-db
+    environment:
+      - POSTGRES_USER=metamcp
+      - POSTGRES_PASSWORD=metamcp
+      - POSTGRES_DB=metamcp
+    volumes:
+      - metamcp_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U metamcp"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - mcp-network
+
+  # ──────────────────────────────────────────────
+  # Registry MCP Servers (managed by MetaMCP above)
+  # Add these in MetaMCP UI → MCP Servers → New Server
+  # or pre-register by pointing MetaMCP at their endpoints.
+  # ──────────────────────────────────────────────
+
+  filesystem-mcp:
+    image: agentnxt/filesystem-mcp-server:latest
+    container_name: filesystem-mcp
+    environment:
+      - ALLOWED_DIRECTORIES=/data
+    volumes:
+      - ./shared-files:/data
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+  github-mcp:
+    image: agentnxt/github-mcp-server:latest
+    container_name: github-mcp
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+  slack-mcp:
+    image: agentnxt/slack-mcp-server:latest
+    container_name: slack-mcp
+    environment:
+      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
+      - SLACK_TEAM_ID=${SLACK_TEAM_ID}
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+  n8n-mcp:
+    image: agentnxt/n8n-mcp-server:latest
+    container_name: n8n-mcp
+    environment:
+      - N8N_API_URL=${N8N_API_URL}
+      - N8N_API_KEY=${N8N_API_KEY}
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+  # Add additional registry servers here following the same pattern.
+  # Each server is registered in MetaMCP UI under MCP Servers.
+
+networks:
+  mcp-network:
+    driver: bridge
+
+volumes:
+  metamcp_postgres_data:
+    driver: local
+  metamcp_data:
+    driver: local
