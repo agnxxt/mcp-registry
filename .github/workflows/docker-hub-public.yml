@@ -1,0 +1,119 @@
+name: Build and Push to Docker Hub (Public)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**Dockerfile'
+      - 'package.json'
+      - 'package-lock.json'
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        server:
+          - agentcrew-mcp-server
+          - argilla-mcp-server
+          - aws-kb-retrieval-mcp-server
+          - brave-search-mcp-server
+          - calcom-mcp-server
+          - camunda-mcp-server
+          - cognitive-memory-mcp-server
+          - dbhub-mcp-server
+          - erpnext-mcp-server
+          - everart-mcp-server
+          - everything-mcp-server
+          - evidently-mcp-server
+          - evolution-mcp-server
+          - exa-mcp-server
+          - filesystem-mcp-server
+          - g2-mcp
+          - gdrive-mcp-server
+          - ghost-mcp-server
+          - github-mcp-server
+          - gitlab-mcp-server
+          - glitchtip-mcp-server
+          - google-maps-mcp-server
+          - grafana-mcp-server
+          - hostinger-mcp
+          - lago-mcp-server
+          - langflow-mcp-server
+          - liferay-mcp-server
+          - limesurvey-mcp-server
+          - litellm-mcp-server
+          - logto-mcp-server
+          - marquez-mcp-server
+          - matomo-mcp-server
+          - mautic-mcp-server
+          - memory-mcp-server
+          - mlflow-mcp-server
+          - n8n-mcp-server
+          - nextcloud-mcp-server
+          - nocodb-mcp-server
+          - ollama-mcp-server
+          - opa-mcp-server
+          - playwright-mcp-server
+          - postiz-mcp-server
+          - qdrant-mcp-server
+          - redis-mcp-server
+          - rustfs-mcp-server
+          - searxng-mcp-server
+          - sequentialthinking-mcp-server
+          - simstudio-mcp-server
+          - skyvern-mcp-server
+          - slack-mcp-server
+          - stalwart-mcp-server
+          - surrealdb-mcp-server
+          - temporal-mcp-server
+          - tuwunel-mcp-server
+          - txtai-mcp-server
+          - typebot-mcp-server
+          - uptime-kuma-mcp-server
+          - woocommerce-mcp-server
+          - wuzapi-mcp-server
+          - zabbix-mcp-server
+      max-parallel: 6
+      fail-fast: false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push ${{ matrix.server }} to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ matrix.server }}
+          file: ${{ matrix.server }}/Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/${{ matrix.server }}:latest
+            ${{ secrets.DOCKER_USERNAME }}/${{ matrix.server }}:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/${{ matrix.server }}:${{ github.ref_name }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/${{ matrix.server }}:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/${{ matrix.server }}:buildcache,mode=max
+
+      - name: Set image visibility to public (via Docker API)
+        run: |
+          curl -X PATCH \
+            -H "Authorization: JWT ${{ secrets.DOCKER_HUB_TOKEN }}" \
+            https://hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/${{ matrix.server }}/ \
+            -d '{"is_private": false}'
+
+      - name: Verify push
+        run: |
+          docker pull ${{ secrets.DOCKER_USERNAME }}/${{ matrix.server }}:latest
+          echo "✓ Image published publicly to Docker Hub"
+          echo "URL: https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/${{ matrix.server }}"
