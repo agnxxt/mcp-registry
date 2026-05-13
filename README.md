@@ -1,16 +1,16 @@
 # MCP Registry
 
-**The Tools Registry for MCP-compatible AI agents.**
+**The Tool Catalog for MCP-compatible AI agents.**
 
 MCP Registry is an open catalog of reusable MCP tools that agents can discover, deploy, and compose through the Model Context Protocol. Each tool package includes focused capabilities, MCP tool definitions, deployment metadata, and runtime instructions.
 
 ---
 
-## Why Tools Registry?
+## Why Tool Catalog?
 
-Traditional MCP projects describe integrations as servers. MCP Registry organizes them as reusable **tools**:
+Traditional MCP projects describe integrations as servers. MCP Registry organizes them as a discoverable **tool catalog**:
 
-| Traditional MCP View | Tools Registry View |
+| Traditional MCP View | Tool Catalog View |
 | --- | --- |
 | MCP server | Tool package |
 | Tool endpoint | Tool action |
