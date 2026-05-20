@@ -1,0 +1,53 @@
+id: surrealkit
+name: SurrealKit
+type: external_tool
+status: proposed
+owner: external
+catalog_owner: Agent-Tools
+
+purpose: >
+  External tool for generating, migrating, seeding, and validating SurrealDB schemas
+  and database objects used by the AGenNext platform.
+
+capabilities:
+  - generate_surrealql
+  - run_migrations
+  - load_seed_data
+  - validate_database_contracts
+  - run_database_smoke_tests
+  - detect_schema_drift
+
+used_by:
+  - Agent-Grammar
+  - Agent-Seed
+  - Agent-Graph
+  - Agent-Blueprint
+  - Agent-Skills
+  - Agent-Review
+
+integration_policy:
+  vendored_source_allowed: false
+  forked_source_allowed: false
+  copied_examples_as_platform_source_allowed: false
+  external_dependency_allowed: true
+  pinned_version_required: true
+  ci_usage_allowed: true
+
+install:
+  strategy: external_dependency
+  version_policy: pinned
+  notes: >
+    CI and platform tooling should install a pinned SurrealKit release or package.
+    Do not copy SurrealKit source into AGenNext repositories.
+
+outputs:
+  - generated_surrealql
+  - migration_report
+  - seed_report
+  - validation_report
+
+rules:
+  - SurrealKit is cataloged as an external tool.
+  - Agent-Kit must not vendor SurrealKit source.
+  - Generated SurrealQL may be committed only when required for bootstrap or runtime loading.
+  - Long-term source of truth should be AGenNext-owned model definitions plus cataloged external tooling.
